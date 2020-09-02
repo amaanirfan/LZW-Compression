@@ -21,7 +21,16 @@ public class LZW {
 	
 	public ArrayList<Integer> encodeString (BufferedReader text)
 	{
+		while (text.ready())
+		{
+			encode(text);
+		}
 		return output;
+	}
+	
+	public void encode(BufferedReader text) //goes through text, adds new patterns to hmap, and updates output with more integers
+	{
+		
 	}
 
 }
