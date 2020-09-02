@@ -1,9 +1,1 @@
-public class LZW{
-	private ArrayList<String> store;
-private FileReader fr;
-
-public LZW(){
-	fr=new FileReader(fileName);
-}
-
-}
+public class LZW
