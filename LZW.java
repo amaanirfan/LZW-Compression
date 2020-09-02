@@ -2,11 +2,13 @@ import java.util.*;
 public class LZW {
 	private HashMap<Integer, String>> table;
 	private FileReader fr;
+	private ArrayList<Integer> output;
 
 	public LZW(String fileName) {
 		fr = new FileReader(fileName);
 		BufferedReader br = new BufferedReader(fr);
 		table=new H
+		output = new ArrayList<Integer>();
 	}
 	
 	public void fillTable() //puts in all the values for one letter chars into the hash map
@@ -19,7 +21,7 @@ public class LZW {
 	
 	public ArrayList<Integer> encodeString (BufferedReader text)
 	{
-		
+		return output;
 	}
 
 }
