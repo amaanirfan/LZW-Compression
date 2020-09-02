@@ -7,7 +7,7 @@ public class LZW {
 	public LZW(String fileName) {
 		fr = new FileReader(fileName);
 		BufferedReader br = new BufferedReader(fr);
-		table=new H
+		table=new HashMap<Integer, String>> table;
 		output = new ArrayList<Integer>();
 	}
 	
