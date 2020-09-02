@@ -1,5 +1,5 @@
 public class LZW {
-	private ArrayList<String> table;
+	private HashMap<String, HashMap<Integer, String>> hash;
 	private FileReader fr;
 
 	public LZW(String fileName) {
