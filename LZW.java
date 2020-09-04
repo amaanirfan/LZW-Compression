@@ -28,7 +28,7 @@ public class LZW {
 	public void encode(BufferedReader text) //goes through text, adds new patterns to hmap, and updates output with more integers
 	{
 		String temp = "";
-		while (text.ready())
+		while (text.ready() || )
 		{
 			temp+=char(text.read());
 		}
