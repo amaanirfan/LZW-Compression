@@ -42,8 +42,9 @@ public class LZW {
 				counter++;
 				table.put(temp, counter);
 				temp = temp.substring(temp.length()-1);
-			}
+			}	
 		}
+		output.add(table.get(temp));
 	}
 
 	public String toString(){
