@@ -35,6 +35,7 @@ public class LZW {
 				String temp2=temp.substring(0,temp.length()-1)
 				int tableIndex =table.get(temp2);
 				output.add(tableIndex);
+				temp = temp.substring(temp.length()-1));
 			}
 		}
 	}
