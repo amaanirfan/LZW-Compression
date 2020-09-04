@@ -31,7 +31,9 @@ public class LZW {
 		while (text.ready())//while ((i=br.read()) != -1){
 		{
 			temp+=char(text.read());
-			if(table)
+			if(!table.containsKey(temp)){
+				
+			}
 		}
 	}
 
