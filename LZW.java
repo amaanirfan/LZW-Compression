@@ -32,7 +32,9 @@ public class LZW {
 		{
 			temp+=char(text.read());
 			if(!table.containsKey(temp)){
-				
+				String temp2=temp.substring(0,temp.length()-1)
+				int tableIndex =table.get(temp2);
+				output.add(tableIndex);
 			}
 		}
 	}
