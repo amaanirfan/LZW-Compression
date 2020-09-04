@@ -1,13 +1,13 @@
 import java.util.*;
 public class LZW {
-	private HashMap<Integer, String>> table;
+	private HashMap<String, Integer> table;
 	private FileReader fr;
 	private ArrayList<Integer> output;
 
 	public LZW(String fileName) {
 		fr = new FileReader(fileName);
 		BufferedReader br = new BufferedReader(fr);
-		table=new HashMap<Integer, String>>();
+		table=new HashMap<Integer, String>();
 		output = new ArrayList<Integer>();
 	}
 	
@@ -28,9 +28,10 @@ public class LZW {
 	public void encode(BufferedReader text) //goes through text, adds new patterns to hmap, and updates output with more integers
 	{
 		String temp = "";
-		while (text.ready() || )
+		while (text.ready())//while ((i=br.read()) != -1){
 		{
 			temp+=char(text.read());
+			if(table)
 		}
 	}
 
