@@ -28,14 +28,17 @@ public class LZW {
 	public void encode(BufferedReader text) //goes through text, adds new patterns to hmap, and updates output with more integers
 	{
 		String temp = "";
+		int counter=127;
 		while (text.ready())//while ((i=br.read()) != -1){
 		{
 			temp+=char(text.read());
 			if(!table.containsKey(temp)){
+				counter++;
+				table.put(temp2,counter);
 				String temp2=temp.substring(0,temp.length()-1)
 				int tableIndex =table.get(temp2);
 				output.add(tableIndex);
-				temp = temp.substring(temp.length()-1));
+				temp = temp.substring(temp.length()-1);
 			}
 		}
 	}
