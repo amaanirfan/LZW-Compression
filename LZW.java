@@ -44,4 +44,8 @@ public class LZW {
 		}
 	}
 
+	public toString(){
+		System.out.println(output);
+	}
+
 }
