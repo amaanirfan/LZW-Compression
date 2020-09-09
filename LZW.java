@@ -44,7 +44,7 @@ public class LZW {
 				temp = temp.substring(temp.length()-1);
 			}	
 		}
-		output.add(table.get(temp));
+		output.add(table.get(temp));//adds the last code into the hmap
 	}
 
 	public String toString(){
