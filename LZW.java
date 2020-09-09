@@ -32,7 +32,7 @@ public class LZW {
 	{
 		String temp = "";
 		int counter=127;
-		while (text.ready())//while ((i=br.read()) != -1){
+		while (text.ready())
 		{
 			temp+=(char)(text.read());
 			if(!table.containsKey(temp)){
