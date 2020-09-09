@@ -23,8 +23,11 @@ public class LZW {
 	
 	public ArrayList<Integer> encodeString () throws IOException
 	{
+		FileWriter out=new FileWriter(fileName+".lzw");
+		BufferedWriter put = new BufferedWriter(out);
 		fillTable();
 		encode(br);
+		put.close();
 		return output;
 	}
 	
@@ -39,6 +42,7 @@ public class LZW {
 			if(!table.containsKey(temp)){ //if the table contains the doesn't have the series of letters already it adds the new pattern to the table and resets the temp variable to the the last letter of the pattern
 				String temp2=temp.substring(0,temp.length()-1);//temp 2 is a temporary placeholder that holds all the characters of temp besides the last one so that we can ouput the pattern which should be in the table already
 				int tableIndex =table.get(temp2);
+				put.write(""+tableIndex+" ");
 				output.add(tableIndex);
 				counter++;
 				table.put(temp, counter);
