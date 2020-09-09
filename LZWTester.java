@@ -3,8 +3,7 @@ public class LZWTester {
 	public static void main (String [] args) throws IOException
 	{
 		LZW test = new LZW("tester.txt");
-		test.encodeString();
-		System.out.println(test);
+		test.createFile();
 	}
 	
 }
