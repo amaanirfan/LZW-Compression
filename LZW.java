@@ -30,12 +30,15 @@ public class LZW {
 	
 	public void encode(BufferedReader text) throws IOException //goes through text, adds new patterns to hmap, and updates output with more integers
 	{
+		//the temp variable keeps track of the series of letters you are reading so you can check if the variable is already present in you table or not
 		String temp = "";
 		int counter=127;
-		while (text.ready())//while ((i=br.read()) != -1){
+		while (text.ready())
 		{
 			temp+=(char)(text.read());
+			//if the table contains the doesnt have the series of letters already it adds the new pattern to the table and resets the temp variable to the the last letter of the pattern
 			if(!table.containsKey(temp)){
+			//temp 2 is a temporary placeholder that holds all the charecters of temp besides the last one so that we can ouput the pattern which should be in the table already
 				String temp2=temp.substring(0,temp.length()-1);
 				int tableIndex =table.get(temp2);
 				output.add(tableIndex);
