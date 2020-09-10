@@ -11,6 +11,9 @@ public class LZW {
 		br = new BufferedReader(fr);
 		table=new HashMap<String, Integer>();
 		newFileName = fileName+".lzw";
+		
+		
+		
 	}
 	
 	public void fillTable() //puts in all the values for one letter chars into the hash map
@@ -23,21 +26,23 @@ public class LZW {
 	
 	public void createFile () throws IOException
 	{
-		FileWriter out=new FileWriter(newFileName);
-		BufferedWriter put = new BufferedWriter(out);
 		fillTable();
 		encode(br);
-		put.close();
+		
 	}
 	
 	public void encode(BufferedReader text) throws IOException //goes through text, adds new patterns to hmap, and updates output with more integers
 	{
 		String temp = "";//the temp variable keeps track of the series of letters you are reading so you can check if the variable is already present in you table or not
 		int counter=127;
+		FileWriter out;
+		try {
+			out = new FileWriter(newFileName);
+			BufferedWriter put = new BufferedWriter(out);
+		
 		while (text.ready())
 		{
 			temp+=(char)(text.read());
-			
 			if(!table.containsKey(temp)){ //if the table contains the doesn't have the series of letters already it adds the new pattern to the table and resets the temp variable to the the last letter of the pattern
 				String temp2=temp.substring(0,temp.length()-1);//temp 2 is a temporary placeholder that holds all the characters of temp besides the last one so that we can ouput the pattern which should be in the table already
 				int tableIndex =table.get(temp2);
@@ -48,5 +53,9 @@ public class LZW {
 			}	
 		}
 		put.write(""+table.get(temp));//writes the last code
+		put.close();
+		} catch (IOException e) {
+			System.out.println("BIG OOPS")
+		}
 	}
 }
