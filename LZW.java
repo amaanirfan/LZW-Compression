@@ -4,14 +4,12 @@ public class LZW {
 	private HashMap<String, Integer> table;
 	private FileReader fr;
 	private BufferedReader br;
-	private ArrayList<Integer> output;
 	private String newFileName;
 
 	public LZW(String fileName) throws FileNotFoundException {
 		fr = new FileReader(fileName);
 		br = new BufferedReader(fr);
 		table=new HashMap<String, Integer>();
-		output = new ArrayList<Integer>();
 		newFileName = fileName+".lzw";
 	}
 	
@@ -29,7 +27,6 @@ public class LZW {
 		BufferedWriter put = new BufferedWriter(out);
 		fillTable();
 		encode(br);
-		put.write(""+output);
 		put.close();
 	}
 	
@@ -44,12 +41,12 @@ public class LZW {
 			if(!table.containsKey(temp)){ //if the table contains the doesn't have the series of letters already it adds the new pattern to the table and resets the temp variable to the the last letter of the pattern
 				String temp2=temp.substring(0,temp.length()-1);//temp 2 is a temporary placeholder that holds all the characters of temp besides the last one so that we can ouput the pattern which should be in the table already
 				int tableIndex =table.get(temp2);
-				output.add(tableIndex);
+				put.write(""+tableIndex+" ");
 				counter++;
 				table.put(temp, counter);
 				temp = temp.substring(temp.length()-1);
 			}	
 		}
-		output.add(table.get(temp));//adds the last code into the hmap
+		put.write(""+table.get(temp));//writes the last code
 	}
 }
