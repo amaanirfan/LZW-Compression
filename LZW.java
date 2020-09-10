@@ -55,7 +55,7 @@ public class LZW {
 		put.write(""+table.get(temp));//writes the last code
 		put.close();
 		} catch (IOException e) {
-			System.out.println("BIG OOPS")
+			System.out.println("BIG OOPS");
 		}
 	}
 }
