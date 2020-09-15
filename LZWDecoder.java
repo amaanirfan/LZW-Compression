@@ -3,7 +3,7 @@ import java.io.*;
 
 public class LZWDecoder {
 	//codeMap is a hashmap that stores the LZW table
-	private HashMap<String, Integer> codeMap;
+	private HashMap<Integer, String> codeMap;
 	//lastIndex stores the index of last number that we added to the table (# things in table - 1)
 	private int lastIndex;
 		
@@ -23,43 +23,41 @@ public class LZWDecoder {
 		//input string we're about to encode
 		String buffer = "";
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+		BufferedWriter outputWriter = new BufferedWriter(new FileWriter(new File(outputFile)));
 		int inputCharNum = reader.read();
 		String prev = "";
+		Integer bufferNum = new Integer(0);
 		while(inputCharNum != -1) {
 			//add the new character to our buffer
-			while(inputCharNum != ' ') { //need to also check for double space...
+			while(inputCharNum != ' ' || inputCharNum != -1) { //need to also check for double space...
 				buffer += Character.toString((char)inputCharNum);
 				inputCharNum = reader.read();
 			}
-		
-			bufferNum = Integer.parseInt(buffer);
-
-			if (lastIndex < 256) { //characters
-				if (!codeMap.containsKey((char)bufferNum)) {
-					
-					lastIndex++;
-				} else {
-					outputWriter.write(codeMap.get((char)buffer));
-				}
-			} else { //integers
-				if (!codeMap.containsKey(buffer)) {
-					lastIndex++;
-				} else {
-					outputWriter.write(codeMap.get(new Integer(bufferNum)));
-				}
-			}
-			codeMap.put(prev+buffer.substring(0,1), lastIndex+1);
-			prev = buffer;
-			buffer = "";
 			
+			if (buffer.length()>1) {
+				bufferNum = new Integer(Integer.parseInt(buffer));
+			} else {
+				bufferNum = new Integer((int)(buffer.charAt(0)));
+			}
+
+			if (!codeMap.containsKey(bufferNum)) {
+				outputWriter.write(prev+prev.substring(0,1));
+				codeMap.put(bufferNum, prev+prev.substring(0,1));
+				lastIndex++;
+			} else {
+				outputWriter.write(codeMap.get(bufferNum));
+				if (!prev.equals("")) {
+					codeMap.put(lastIndex+1, prev+codeMap.get(bufferNum).substring(0,1));
+				}
+				lastIndex++;
+			}
+
+			prev = codeMap.get(bufferNum);
+			buffer = "";
+			inputCharNum = reader.read();
 		}
 		
-		
-		
-		
-		//writing the output to the file
-		BufferedWriter outputWriter = new BufferedWriter(new FileWriter(new File(outputFile)));
-		outputWriter.write(output);
+		//writing the output to the file		
 		reader.close();
 		outputWriter.close();
 	}
