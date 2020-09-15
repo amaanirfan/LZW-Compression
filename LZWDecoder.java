@@ -17,12 +17,10 @@ public class LZWDecoder {
 	}
 	
 	public void decode(String inputFile, String outputFile) throws IOException{
-		//the final output to the file
-		String output = "";
-		
 		//input string we're about to encode
 		String buffer = "";
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+		BufferedWriter outputWriter = new BufferedWriter(new FileWriter(new File(outputFile)));
 		int inputCharNum = reader.read();
 		while(inputCharNum != -1) {
 			//add the new character to our buffer
@@ -34,9 +32,7 @@ public class LZWDecoder {
 		
 		
 		
-		//writing the output to the file
-		BufferedWriter outputWriter = new BufferedWriter(new FileWriter(new File(outputFile)));
-		outputWriter.write(output);
+		//closing the reader and writer
 		reader.close();
 		outputWriter.close();
 	}
