@@ -9,9 +9,9 @@ public class LZWDecoder {
 		
 	public LZWDecoder() {
 		//adds first 128 ascii characters to table
-		codeMap =  new HashMap<String, Integer>(128);
+		codeMap =  new HashMap<Integer, String>(128);
 		for (int i = 0; i<128; i++) {
-			codeMap.put(Character.toString((char)(i)), i); //value of ith ascii as a key is i
+			codeMap.put(i, Character.toString((char)(i))); //value of ith ascii as a key is i
 		}
 		lastIndex = 127;
 	}
@@ -22,10 +22,33 @@ public class LZWDecoder {
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 		BufferedWriter outputWriter = new BufferedWriter(new FileWriter(new File(outputFile)));
 		int inputCharNum = reader.read();
+		String prev = "";
 		while(inputCharNum != -1) {
 			//add the new character to our buffer
-			buffer += Character.toString((char)inputCharNum);
-			
+			while(inputCharNum != ' ') { //need to also check for double space...
+				buffer += Character.toString((char)inputCharNum);
+				inputCharNum = reader.read();
+			}
+		
+			bufferNum = Integer.parseInt(buffer);
+
+			if (lastIndex < 256) { //characters
+				if (!codeMap.containsKey((char)bufferNum)) {
+					
+					lastIndex++;
+				} else {
+					outputWriter.write(codeMap.get((char)buffer));
+				}
+			} else { //integers
+				if (!codeMap.containsKey(buffer)) {
+					lastIndex++;
+				} else {
+					outputWriter.write(codeMap.get(new Integer(bufferNum)));
+				}
+			}
+			codeMap.put(prev+buffer.substring(0,1), lastIndex+1);
+			prev = buffer;
+			buffer = "";
 			
 		}
 		
