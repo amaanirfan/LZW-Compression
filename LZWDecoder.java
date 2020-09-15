@@ -26,12 +26,14 @@ public class LZWDecoder {
 		Integer bufferNum = new Integer(0);
 		while(inputCharNum != -1) {
 			//add the new character to our buffer
-			while(inputCharNum != ' ' || inputCharNum != -1) { //need to also check for double space...
+			buffer += Character.toString((char)inputCharNum);
+			inputCharNum = reader.read();
+			while(inputCharNum != ' ' || inputCharNum != -1) { 
 				buffer += Character.toString((char)inputCharNum);
 				inputCharNum = reader.read();
 			}
 			
-			if (buffer.length()>1) {
+			if (buffer.length() > 1) {
 				bufferNum = new Integer(Integer.parseInt(buffer));
 			} else {
 				bufferNum = new Integer((int)(buffer.charAt(0)));
