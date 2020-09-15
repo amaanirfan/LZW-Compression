@@ -17,9 +17,6 @@ public class LZWDecoder {
 	}
 	
 	public void decode(String inputFile, String outputFile) throws IOException{
-		//the final output to the file
-		String output = "";
-		
 		//input string we're about to encode
 		String buffer = "";
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
@@ -56,8 +53,8 @@ public class LZWDecoder {
 			buffer = "";
 			inputCharNum = reader.read();
 		}
-		
-		//writing the output to the file		
+			
+		//closing the reader and writer
 		reader.close();
 		outputWriter.close();
 	}
