@@ -28,11 +28,11 @@ public class LZWDecoder {
 			//add the new character to our buffer
 			buffer += Character.toString((char)inputCharNum);
 			inputCharNum = reader.read();
-			while(inputCharNum != ' ' || inputCharNum != -1) { 
+			while(inputCharNum != ' ' && inputCharNum != -1) { 
 				buffer += Character.toString((char)inputCharNum);
 				inputCharNum = reader.read();
 			}
-			
+
 			if (buffer.length() > 1) {
 				bufferNum = new Integer(Integer.parseInt(buffer));
 			} else {
@@ -47,10 +47,10 @@ public class LZWDecoder {
 				outputWriter.write(codeMap.get(bufferNum));
 				if (!prev.equals("")) {
 					codeMap.put(lastIndex+1, prev+codeMap.get(bufferNum).substring(0,1));
+					lastIndex++;
 				}
-				lastIndex++;
 			}
-
+			//System.out.println(buffer);
 			prev = codeMap.get(bufferNum);
 			buffer = "";
 			inputCharNum = reader.read();
