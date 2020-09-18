@@ -52,7 +52,7 @@ public class LZWDecoder {
 				outputWriter.write(prev+prev.substring(0,1));
 				codeMap.put(bufferNum, prev+prev.substring(0,1));
 				lastIndex++;
-			} else { //just write the code
+			} else { //write the corresponding string and add to codeMap
 				outputWriter.write(codeMap.get(bufferNum));
 				if (!prev.equals("")) {
 					codeMap.put(lastIndex+1, prev+codeMap.get(bufferNum).substring(0,1));
