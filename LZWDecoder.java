@@ -7,15 +7,15 @@ public class LZWDecoder {
 	//lastIndex stores the index of last number that we added to the table (# things in table - 1)
 	private int lastIndex;
 	//the initial size of the table
-	private final int initTableSize = 128;
+	private final int INIT_TABLE_SIZE = 128;
 		
 	public LZWDecoder() {
 		//adds first 128 ascii characters to table
-		codeMap =  new HashMap<Integer, String>(initTableSize);
-		for (int i = 0; i<initTableSize; i++) {
+		codeMap =  new HashMap<Integer, String>(INIT_TABLE_SIZE);
+		for (int i = 0; i<INIT_TABLE_SIZE; i++) {
 			codeMap.put(i, Character.toString((char)(i))); //value of ith ascii as a key is i
 		}
-		lastIndex = initTableSize - 1;
+		lastIndex = INIT_TABLE_SIZE - 1;
 	}
 	
 	public void decode(String inputFile, String outputFile) throws IOException{
