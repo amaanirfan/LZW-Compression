@@ -42,7 +42,7 @@ public class LZW {
 		while (text.ready())
 		{
 			temp+=(char)(text.read());
-			if(!table.containsKey(temp)){ //if the table contains the doesn't have the series of letters already it adds the new pattern to the table and resets the temp variable to the the last letter of the pattern
+			if(!table.containsKey(temp)){ //if the table doesn't have the series of letters already it adds the new pattern to the table
 				String temp2=temp.substring(0,temp.length()-1);//temp 2 is a temporary placeholder that holds all the characters of temp besides the last one so that we can ouput the pattern which should be in the table already
 				int tableIndex =table.get(temp2);
 				if (tableIndex >= EXTENDED_ASCII_SIZE) {
@@ -52,7 +52,7 @@ public class LZW {
 				}
 				counter++;
 				table.put(temp, counter); //adds code to table
-				temp = temp.substring(temp.length()-1); //sets input string to last char
+				temp = temp.substring(temp.length()-1); //resets temp string to last char
 			}	
 		}
 		put.write(""+table.get(temp)); //writes the last code
