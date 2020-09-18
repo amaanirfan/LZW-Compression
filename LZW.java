@@ -12,7 +12,7 @@ public class LZW {
 		fr = new FileReader(fileName);
 		br = new BufferedReader(fr);
 		table=new HashMap<String, Integer>();
-		newFileName = "out.txt";
+		newFileName = "out.txt"; //OUTPUT FILE
 		
 	}
 	
