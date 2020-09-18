@@ -43,7 +43,7 @@ public class LZW {
 		{
 			temp+=(char)(text.read());
 			if(!table.containsKey(temp)){ //if the table doesn't have the series of letters already it adds the new pattern to the table
-				String temp2=temp.substring(0,temp.length()-1);//temp 2 is a temporary placeholder that holds all the characters of temp besides the last one so that we can ouput the pattern which should be in the table already
+				String temp2=temp.substring(0,temp.length()-1);//temp 2 is a temporary placeholder that holds all the characters of temp besides the last one so that we can output the pattern which should be in the table already
 				int tableIndex =table.get(temp2);
 				if (tableIndex >= EXTENDED_ASCII_SIZE) {
 					put.write(""+tableIndex+" "); //numbers not corresponding to ASCII table chars stay the same
