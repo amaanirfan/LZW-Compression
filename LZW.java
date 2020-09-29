@@ -54,7 +54,7 @@ public class LZW {
 				} else {
 					put.write(""+(char)(tableIndex)+" "); //numbers corresponding to ASCII table chars get converted to chars (less space)
 				}
-				qui.pluckAndPull(temp);
+				homeQueue.placeToBack(temp);
 				counter++;
 				if (maxSize <= table.size()) {
 					String leastRecent = homeQueue.pollFirst();
