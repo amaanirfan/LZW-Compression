@@ -24,7 +24,7 @@ public class LZW {
 		table=new HashMap<String, Integer>();
 		for(int n=0;n<INIT_TABLE_SIZE;n++){
 			table.put(""+(char)n, n);
-			qui.add("" + (char)n);
+			homeQueue.add("" + (char)n);
 		}
 	}
 	
@@ -54,11 +54,11 @@ public class LZW {
 				} else {
 					put.write(""+(char)(tableIndex)+" "); //numbers corresponding to ASCII table chars get converted to chars (less space)
 				}
+				qui.pluckAndPull(temp);
 				counter++;
 				if (maxSize <= table.size()) {
-					//String leastRecent = queue.lastElement();
-					//queue.remove(stack.size() - 1);
-					//table.remove(leastRecent);
+					String leastRecent = homeQueue.pollFirst();
+					table.remove(leastRecent);
 					//add this line in and find the last thing in the stack and delete it from the stack and earlier whenever we use an element from the table push that string to top of stack
 				}
 				table.put(temp, counter); //adds code to table
