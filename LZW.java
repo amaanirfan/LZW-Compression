@@ -8,7 +8,7 @@ public class LZW {
 	private final int INIT_TABLE_SIZE = 127;
 	private final int EXTENDED_ASCII_SIZE = 256;
 	private int maxSize;
-	private Stack <String> stack;
+	private Qui homeQueue;
 
 	public LZW(String fileName, int maxSize) throws FileNotFoundException {
 		fr = new FileReader(fileName);
@@ -16,7 +16,7 @@ public class LZW {
 		table=new HashMap<String, Integer>();
 		newFileName = "out.txt"; //OUTPUT FILE
 		this.maxSize = maxSize;
-		stack = new Stack <String>();
+		homeQueue = new Qui ();
 	}
 	
 	public void fillTable() //puts in all the values for one letter chars into the hash map
@@ -24,7 +24,7 @@ public class LZW {
 		table=new HashMap<String, Integer>();
 		for(int n=0;n<INIT_TABLE_SIZE;n++){
 			table.put(""+(char)n, n);
-			stack.push("" + (char)n);
+			qui.add("" + (char)n);
 		}
 	}
 	
@@ -56,10 +56,13 @@ public class LZW {
 				}
 				counter++;
 				if (maxSize <= table.size()) {
+					//String leastRecent = queue.lastElement();
+					//queue.remove(stack.size() - 1);
+					//table.remove(leastRecent);
 					//add this line in and find the last thing in the stack and delete it from the stack and earlier whenever we use an element from the table push that string to top of stack
 				}
 				table.put(temp, counter); //adds code to table
-				stack.push(temp);
+				//queue.push(temp);
 				temp = temp.substring(temp.length()-1); //resets temp string to last char
 			}	
 		}
